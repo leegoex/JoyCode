@@ -3,6 +3,7 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-	cout<<"Hello World\n";
+	char prompt[] = "Hello World!\n";
+	cout<<prompt;
 	return 0;
 }
