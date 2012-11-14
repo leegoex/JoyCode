@@ -62,11 +62,98 @@ void shell_sort(int *arr, int size)
 	}
 }
 
+//归并排序算法的基本操作时合并两个已排序的表。因为这两个表示已排序的，所以若将
+//输出放到第3个表中则该算法可以通过对输入数据一趟排序来完成。
+void mergesorted(int *arr, int *tmpArr, int l, int c, int r)
+{
+	int tmp = l;
+	int lend = c-1;
+	int elem = r - l + 1;
+
+	while (l <= lend && c <= r) {
+		if(arr[l] < arr[c])
+			tmpArr[tmp++] = arr[l++];
+		else
+			tmpArr[tmp++] = arr[c++];
+	}
+	while (l <= lend)
+		tmpArr[tmp++] = arr[l++];
+	while(c <= r)
+		tmpArr[tmp++] = arr[c++];
+
+	int i = 0;
+	for (i = 0; i < elem; i++,r--)
+		arr[r] = tmpArr[r];
+}
+
+void mergesort(int *arr, int *tmpArr, int l, int r)
+{
+	if(l < r)
+	{
+		int c = (l + r) / 2;
+		mergesort(arr, tmpArr, l, c);
+		mergesort(arr, tmpArr, c+1, r);
+		mergesorted(arr, tmpArr, l, c+1, r);
+	}
+}
+
+void merge_sort(int *arr, int size)
+{
+	int *tmpArr = new int[size];
+	mergesort(arr, tmpArr, 0, size-1);
+	delete []tmpArr;
+}
+
+//快速排序
+int median3(int *arr, int l, int r)
+{
+	int c = (l + r) / 2;
+	if(arr[c] < arr[l])
+		elem_swap(&arr[c], &arr[l]);
+	if(arr[r] < arr[l])
+		elem_swap(&arr[r], &arr[l]);
+	if (arr[r] < arr[c])
+		elem_swap(&arr[r], &arr[c]);
+
+	elem_swap(&arr[c], &arr[r-1]);
+	return arr[r-1];
+}
+
+void quicksort(int *arr, int l, int r)
+{
+	if(l + 10 <= r)
+	{
+		int pivot = median3(arr, l, r);
+		int i = l, j = r-1;
+		for (;;)
+		{
+			while(arr[++i] < pivot) {}
+			while(arr[--j] > pivot) {}
+			if(i < j)
+				elem_swap(&arr[i], &arr[j]);
+			else
+				break;
+		}
+		elem_swap(&arr[i], &arr[r-1]);
+		quicksort(arr, l, i-1);
+		quicksort(arr, i+1, r);
+	}
+	else
+		insertion_sort1(arr+l, r-l+1);
+}
+
+void quick_sort(int *arr, int size)
+{
+	quicksort(arr, 0, size-1);
+}
+
 int main(int argc, char *argv[])
 {
 	int arr[10] = {5, 1, 8, 3, 2, 7, 0, 6, 4, 9};
 	//insertion_sort2(arr, 10);
-	shell_sort(arr, 10);
+	//shell_sort(arr, 10);
+	//merge_sort(arr, 10);
+	quick_sort(arr, 10);
 	int i = 0;
 	for(i = 0; i < 10; i++) {
 		cout<<arr[i]<<' ';
