@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 void elem_swap(int *a, int *b)
@@ -149,16 +150,34 @@ void quick_sort(int *arr, int size)
 
 int main(int argc, char *argv[])
 {
-	int arr[10] = {5, 1, 8, 3, 2, 7, 0, 6, 4, 9};
-	//insertion_sort2(arr, 10);
-	//shell_sort(arr, 10);
-	//merge_sort(arr, 10);
-	quick_sort(arr, 10);
-	int i = 0;
-	for(i = 0; i < 10; i++) {
-		cout<<arr[i]<<' ';
+	string str;
+	cout<<"Please enter the algorithm(insertion1, insertion2, shell, merge, quick)";
+	cout<<"\nor enter quit to exit the program:";
+	cin>>str;
+	while (str != "quit")
+	{
+		int arr[20] = {5, 15, 8, 3, 2, 17, 10, 6, 14, 19, 1, 13, 0, 12, 7, 4, 16, 11, 18, 9};
+		int size = sizeof(arr)/sizeof(int);
+		if(str == "insertion1") {
+			insertion_sort1(arr, size);
+		} else if(str == "insertion2") {
+			insertion_sort2(arr, size);
+		} else if(str == "shell") {
+			shell_sort(arr, size);
+		} else if(str == "merge") {
+			merge_sort(arr, size);
+		} else if(str == "quick") {
+			quick_sort(arr, size);
+		} else {
+			cout<<"Unknown sorting algorithm\n";
+		}
+		int i = 0;
+		for(i = 0; i < size; i++) 
+			cout<<arr[i]<<' ';
+		cout<<endl;
+		cout<<"Please enter the sorting algorithm(insertion1, insertion2, shell, merge, quick):";
+		cin>>str;
 	}
-	cout<<endl;
 	system("pause");
 	return 0;
 }
