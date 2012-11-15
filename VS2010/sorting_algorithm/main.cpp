@@ -11,23 +11,7 @@ void elem_swap(int *a, int *b)
 
 //插入排序由N-1趟排序组成。对于i=1到N-1趟，插入排序保证从0到位置i上的元素为已排序状态。
 //插入排序所表达的策略是：在第i趟排序，我们将位置i上的元素向左移至它在前i+1个元素中的正确位置上。
-void insertion_sort1(int *arr, int size)
-{
-	int i, j, swap;
-	for(i = 1; i < size; i++) {
-		for(j = i; j >= 0; j--) {
-			if(arr[j] < arr[j-1]) {
-				elem_swap(&arr[j], &arr[j-1]);
-				swap = 1;
-			} else
-				swap = 0;
-			if(swap == 0)
-				break;
-		}
-	}
-}
-
-void insertion_sort2(int *arr, int size)
+void insertion_sort(int *arr, int size)
 {
 	int i,j;
 	for(i = 1; i < size; i++) {
@@ -140,7 +124,7 @@ void quicksort(int *arr, int l, int r)
 		quicksort(arr, i+1, r);
 	}
 	else
-		insertion_sort1(arr+l, r-l+1);
+		insertion_sort(arr+l, r-l+1);
 }
 
 void quick_sort(int *arr, int size)
@@ -151,17 +135,15 @@ void quick_sort(int *arr, int size)
 int main(int argc, char *argv[])
 {
 	string str;
-	cout<<"Please enter the algorithm(insertion1, insertion2, shell, merge, quick)";
+	cout<<"Please enter the algorithm(insertion, shell, merge, quick)";
 	cout<<"\nor enter quit to exit the program:";
 	cin>>str;
 	while (str != "quit")
 	{
 		int arr[20] = {5, 15, 8, 3, 2, 17, 10, 6, 14, 19, 1, 13, 0, 12, 7, 4, 16, 11, 18, 9};
 		int size = sizeof(arr)/sizeof(int);
-		if(str == "insertion1") {
-			insertion_sort1(arr, size);
-		} else if(str == "insertion2") {
-			insertion_sort2(arr, size);
+		if(str == "insertion") {
+			insertion_sort(arr, size);
 		} else if(str == "shell") {
 			shell_sort(arr, size);
 		} else if(str == "merge") {
@@ -175,7 +157,7 @@ int main(int argc, char *argv[])
 		for(i = 0; i < size; i++) 
 			cout<<arr[i]<<' ';
 		cout<<endl;
-		cout<<"Please enter the sorting algorithm(insertion1, insertion2, shell, merge, quick):";
+		cout<<"Please enter the sorting algorithm(insertion, shell, merge, quick):";
 		cin>>str;
 	}
 	system("pause");
