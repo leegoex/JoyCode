@@ -1,21 +1,24 @@
 #include <iostream>
 #include <string>
+#include "mcomplex.h"
 using namespace std;
 
-void elem_swap(int *a, int *b)
+template<typename T>
+void elem_swap(T& a, T& b)
 {
-	*a = *a ^ *b;
-	*b = *a ^ *b;
-	*a = *a ^ *b;
+	T tmp = a;
+	a = b;
+	b = tmp;
 }
 
 //插入排序由N-1趟排序组成。对于i=1到N-1趟，插入排序保证从0到位置i上的元素为已排序状态。
 //插入排序所表达的策略是：在第i趟排序，我们将位置i上的元素向左移至它在前i+1个元素中的正确位置上。
-void insertion_sort(int *arr, int size)
+template<typename T>
+void insertion_sort(T *arr, int size)
 {
 	int i,j;
 	for(i = 1; i < size; i++) {
-		int tmp = arr[i];
+		T tmp = arr[i];
 		for(j = i; j > 0 && arr[j-1] > tmp; j--)
 			arr[j] = arr[j-1];
 		arr[j] = tmp;
@@ -26,7 +29,8 @@ void insertion_sort(int *arr, int size)
 //它针对插入排序的优化就是减少了对象交换的次数。因为它最终都要回归到处理增量为1的情况，
 //而此时就与处理插入排序的情形一样了
 //另外，关于增量序列，最好的通项公式是（数学公式，无法表达）
-void shell_sort(int *arr, int size)
+template<typename T>
+void shell_sort(T *arr, int size)
 {
 	int gap = size / 2;
 	for (; gap > 0; gap /= 2)
@@ -34,7 +38,7 @@ void shell_sort(int *arr, int size)
 		int i,j;
 		for (i = gap; i < size; i += gap)
 		{
-			int tmp = arr[i];
+			T tmp = arr[i];
 			for (j = i; j > 0 && arr[j-gap] > tmp; j -= gap)
 				arr[j] = arr[j-gap];
 			arr[j] = tmp;
@@ -49,7 +53,8 @@ void shell_sort(int *arr, int size)
 
 //归并排序算法的基本操作时合并两个已排序的表。因为这两个表示已排序的，所以若将
 //输出放到第3个表中则该算法可以通过对输入数据一趟排序来完成。
-void mergesorted(int *arr, int *tmpArr, int l, int c, int r)
+template<typename T>
+void mergesorted(T *arr, T *tmpArr, int l, int c, int r)
 {
 	int tmp = l;
 	int lend = c-1;
@@ -71,7 +76,8 @@ void mergesorted(int *arr, int *tmpArr, int l, int c, int r)
 		arr[r] = tmpArr[r];
 }
 
-void mergesort(int *arr, int *tmpArr, int l, int r)
+template<typename T>
+void mergesort(T *arr, T *tmpArr, int l, int r)
 {
 	if(l < r)
 	{
@@ -82,44 +88,47 @@ void mergesort(int *arr, int *tmpArr, int l, int r)
 	}
 }
 
-void merge_sort(int *arr, int size)
+template<typename T>
+void merge_sort(T *arr, int size)
 {
-	int *tmpArr = new int[size];
+	T *tmpArr = new T[size];
 	mergesort(arr, tmpArr, 0, size-1);
 	delete []tmpArr;
 }
 
 //快速排序
-int median3(int *arr, int l, int r)
+template<typename T>
+T& median3(T *arr, int l, int r)
 {
 	int c = (l + r) / 2;
 	if(arr[c] < arr[l])
-		elem_swap(&arr[c], &arr[l]);
+		elem_swap(arr[c], arr[l]);
 	if(arr[r] < arr[l])
-		elem_swap(&arr[r], &arr[l]);
+		elem_swap(arr[r], arr[l]);
 	if (arr[r] < arr[c])
-		elem_swap(&arr[r], &arr[c]);
+		elem_swap(arr[r], arr[c]);
 
-	elem_swap(&arr[c], &arr[r-1]);
+	elem_swap(arr[c], arr[r-1]);
 	return arr[r-1];
 }
 
-void quicksort(int *arr, int l, int r)
+template<typename T>
+void quicksort(T *arr, int l, int r)
 {
 	if(l + 10 <= r)
 	{
-		int pivot = median3(arr, l, r);
+		T pivot = median3(arr, l, r);
 		int i = l, j = r-1;
 		for (;;)
 		{
 			while(arr[++i] < pivot) {}
 			while(arr[--j] > pivot) {}
 			if(i < j)
-				elem_swap(&arr[i], &arr[j]);
+				elem_swap(arr[i], arr[j]);
 			else
 				break;
 		}
-		elem_swap(&arr[i], &arr[r-1]);
+		elem_swap(arr[i], arr[r-1]);
 		quicksort(arr, l, i-1);
 		quicksort(arr, i+1, r);
 	}
@@ -127,7 +136,8 @@ void quicksort(int *arr, int l, int r)
 		insertion_sort(arr+l, r-l+1);
 }
 
-void quick_sort(int *arr, int size)
+template<typename T>
+void quick_sort(T *arr, int size)
 {
 	quicksort(arr, 0, size-1);
 }
@@ -140,8 +150,15 @@ int main(int argc, char *argv[])
 	cin>>str;
 	while (str != "quit")
 	{
-		int arr[20] = {5, 15, 8, 3, 2, 17, 10, 6, 14, 19, 1, 13, 0, 12, 7, 4, 16, 11, 18, 9};
-		int size = sizeof(arr)/sizeof(int);
+		//int arr[20] = {5, 15, 8, 3, 2, 17, 10, 6, 14, 19, 1, 13, 0, 12, 7, 4, 16, 11, 18, 9};
+		//int size = sizeof(arr)/sizeof(int);
+		//char arr[26] = {'f','w','g','z','c','t','d','b','q','e','r','y','u','i','o','p','a','s','h','j','k','l','x','v','n','m'};
+		//int size = sizeof(arr)/sizeof(char);
+		mcomplex arr[20] = {mcomplex(15, 5), mcomplex(7, 15), mcomplex(9, 8), mcomplex(1, 3), mcomplex(13, 2), 
+			mcomplex(2, 17), mcomplex(5, 10), mcomplex(17, 6), mcomplex(0, 14), mcomplex(4, 19), mcomplex(19, 1), 
+			mcomplex(8, 13), mcomplex(10, 0), mcomplex(3, 12), mcomplex(18, 7), mcomplex(11, 4), mcomplex(12, 16), 
+			mcomplex(6, 11), mcomplex(14, 18), mcomplex(16, 9)};
+		int size = sizeof(arr)/sizeof(mcomplex);
 		if(str == "insertion") {
 			insertion_sort(arr, size);
 		} else if(str == "shell") {
