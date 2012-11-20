@@ -54,22 +54,22 @@ void shell_sort(T *arr, int size)
 //归并排序算法的基本操作时合并两个已排序的表。因为这两个表示已排序的，所以若将
 //输出放到第3个表中则该算法可以通过对输入数据一趟排序来完成。
 template<typename T>
-void mergesorted(T *arr, T *tmpArr, int l, int c, int r)
+void mergesorted(T *arr, T *tmpArr, int l, int rstart, int r)
 {
 	int tmp = l;
-	int lend = c-1;
+	int lend = rstart-1;
 	int elem = r - l + 1;
 
-	while (l <= lend && c <= r) {
-		if(arr[l] < arr[c])
+	while (l <= lend && rstart <= r) {
+		if(arr[l] < arr[rstart])
 			tmpArr[tmp++] = arr[l++];
 		else
-			tmpArr[tmp++] = arr[c++];
+			tmpArr[tmp++] = arr[rstart++];
 	}
 	while (l <= lend)
 		tmpArr[tmp++] = arr[l++];
-	while(c <= r)
-		tmpArr[tmp++] = arr[c++];
+	while(rstart <= r)
+		tmpArr[tmp++] = arr[rstart++];
 
 	int i = 0;
 	for (i = 0; i < elem; i++,r--)
@@ -152,13 +152,13 @@ int main(int argc, char *argv[])
 	{
 		//int arr[20] = {5, 15, 8, 3, 2, 17, 10, 6, 14, 19, 1, 13, 0, 12, 7, 4, 16, 11, 18, 9};
 		//int size = sizeof(arr)/sizeof(int);
-		//char arr[26] = {'f','w','g','z','c','t','d','b','q','e','r','y','u','i','o','p','a','s','h','j','k','l','x','v','n','m'};
-		//int size = sizeof(arr)/sizeof(char);
-		mcomplex arr[20] = {mcomplex(15, 5), mcomplex(7, 15), mcomplex(9, 8), mcomplex(1, 3), mcomplex(13, 2), 
-			mcomplex(2, 17), mcomplex(5, 10), mcomplex(17, 6), mcomplex(0, 14), mcomplex(4, 19), mcomplex(19, 1), 
-			mcomplex(8, 13), mcomplex(10, 0), mcomplex(3, 12), mcomplex(18, 7), mcomplex(11, 4), mcomplex(12, 16), 
-			mcomplex(6, 11), mcomplex(14, 18), mcomplex(16, 9)};
-		int size = sizeof(arr)/sizeof(mcomplex);
+		char arr[26] = {'f','w','g','z','c','t','d','b','q','e','r','y','u','i','o','p','a','s','h','j','k','l','x','v','n','m'};
+		int size = sizeof(arr)/sizeof(char);
+// 		mcomplex arr[20] = {mcomplex(15, 5), mcomplex(7, 15), mcomplex(9, 8), mcomplex(1, 3), mcomplex(13, 2), 
+// 			mcomplex(2, 17), mcomplex(5, 10), mcomplex(17, 6), mcomplex(0, 14), mcomplex(4, 19), mcomplex(19, 1), 
+// 			mcomplex(8, 13), mcomplex(10, 0), mcomplex(3, 12), mcomplex(18, 7), mcomplex(11, 4), mcomplex(12, 16), 
+// 			mcomplex(6, 11), mcomplex(14, 18), mcomplex(16, 9)};
+// 		int size = sizeof(arr)/sizeof(mcomplex);
 		if(str == "insertion") {
 			insertion_sort(arr, size);
 		} else if(str == "shell") {
