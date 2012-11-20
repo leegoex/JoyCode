@@ -1,4 +1,5 @@
 #include <iostream>
+#include "expression_tree.h"
 using namespace std;
 
 struct TreeNode{
@@ -81,6 +82,16 @@ int main(int argc, char *argv[])
 	//后续遍历
 	cout<<"Postorder traversal:"<<endl;
 	printTreePostorder(&n_a);
+	cout<<endl;
+
+	//二叉树应用-表达式树
+	char expr[1024] = {0};
+	cout<<"Please enter a suffix expression:\n";
+	cin>>expr;
+	expression_tree exprTree(expr);
+	exprTree.build_tree();
+	exprTree.printTreePostorder();
+	exprTree.destroy_tree();
 	cout<<endl;
 
 	system("pause");

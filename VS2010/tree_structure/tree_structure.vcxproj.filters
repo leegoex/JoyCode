@@ -18,5 +18,13 @@
     <ClCompile Include="main.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
+    <ClCompile Include="expression_tree.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="expression_tree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
