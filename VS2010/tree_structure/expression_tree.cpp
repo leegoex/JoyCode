@@ -33,7 +33,11 @@ void expression_tree::build_tree()
 			if (nodes.size()<2)
 			{
 				cout<<"Build error! The expression is not a suffix expression!\n";
-				break;
+				while (nodes.size()>0) {
+					free_tree(nodes.top());
+					nodes.pop();
+				}
+				return;
 			}
 			//先出的结点为右孩子结点
 			new_node->rchild = nodes.top();
@@ -43,6 +47,15 @@ void expression_tree::build_tree()
 		} 
 		//将该结点入栈
 		nodes.push(new_node);
+	}
+	if (nodes.size()!=1)
+	{
+		cout<<"Build error! The expression is not a suffix expression!\n";
+		while (nodes.size()>0) {
+			free_tree(nodes.top());
+			nodes.pop();
+		}
+		return;
 	}
 	m_root = nodes.top();
 }
