@@ -1,20 +1,23 @@
 #include <iostream>
 #include "expression_tree.h"
+#include "binarysearch_tree.h"
 using namespace std;
 
+template <typename T>
 struct TreeNode{
-	char c;
+	T c;
 	TreeNode *firstChild;
 	TreeNode *nextSibling;
 };
 
 //前序遍历：对结点的处理工作是在它的诸儿子结点被处理之前进行的
-void printTreePreorder(TreeNode *t)
+template <typename T>
+void printTreePreorder(TreeNode<T> *t)
 {
 	if (t == NULL)
 		return;
 	cout<<t->c<<' ';
-	TreeNode *tmp = t->firstChild;
+	TreeNode<T> *tmp = t->firstChild;
 	while (tmp)
 	{
 		printTreePreorder(tmp);
@@ -23,11 +26,12 @@ void printTreePreorder(TreeNode *t)
 }
 
 //后续遍历：对结点的处理工作是在它的诸儿子结点被处理之后进行的
-void printTreePostorder(TreeNode *t)
+template <typename T>
+void printTreePostorder(TreeNode<T> *t)
 {
 	if (t == NULL)
 		return;
-	TreeNode *tmp = t->firstChild;
+	TreeNode<T> *tmp = t->firstChild;
 	while(tmp)
 	{
 		printTreePostorder(tmp);
@@ -39,23 +43,23 @@ void printTreePostorder(TreeNode *t)
 int main(int argc, char *argv[])
 {
 	//初始化
-	TreeNode n_a = {'a', NULL, NULL};
-	TreeNode n_b = {'b', NULL, NULL};
-	TreeNode n_c = {'c', NULL, NULL};
-	TreeNode n_d = {'d', NULL, NULL};
-	TreeNode n_e = {'e', NULL, NULL};
-	TreeNode n_f = {'f', NULL, NULL};
-	TreeNode n_g = {'g', NULL, NULL};
-	TreeNode n_h = {'h', NULL, NULL};
-	TreeNode n_i = {'i', NULL, NULL};
-	TreeNode n_j = {'j', NULL, NULL};
-	TreeNode n_k = {'k', NULL, NULL};
-	TreeNode n_l = {'l', NULL, NULL};
-	TreeNode n_m = {'m', NULL, NULL};
-	TreeNode n_n = {'n', NULL, NULL};
-	TreeNode n_o = {'o', NULL, NULL};
-	TreeNode n_p = {'p', NULL, NULL};
-	TreeNode n_q = {'q', NULL, NULL};
+	TreeNode<char> n_a = {'a', NULL, NULL};
+	TreeNode<char> n_b = {'b', NULL, NULL};
+	TreeNode<char> n_c = {'c', NULL, NULL};
+	TreeNode<char> n_d = {'d', NULL, NULL};
+	TreeNode<char> n_e = {'e', NULL, NULL};
+	TreeNode<char> n_f = {'f', NULL, NULL};
+	TreeNode<char> n_g = {'g', NULL, NULL};
+	TreeNode<char> n_h = {'h', NULL, NULL};
+	TreeNode<char> n_i = {'i', NULL, NULL};
+	TreeNode<char> n_j = {'j', NULL, NULL};
+	TreeNode<char> n_k = {'k', NULL, NULL};
+	TreeNode<char> n_l = {'l', NULL, NULL};
+	TreeNode<char> n_m = {'m', NULL, NULL};
+	TreeNode<char> n_n = {'n', NULL, NULL};
+	TreeNode<char> n_o = {'o', NULL, NULL};
+	TreeNode<char> n_p = {'p', NULL, NULL};
+	TreeNode<char> n_q = {'q', NULL, NULL};
 
 	//构造一棵树
 	n_a.firstChild = &n_b;
