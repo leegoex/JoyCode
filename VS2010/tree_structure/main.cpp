@@ -42,6 +42,17 @@ void printTreePostorder(TreeNode<T> *t)
 
 int main(int argc, char *argv[])
 {
+	int arr[] = {5, 12, 7, 4, 16, 9};
+	int size = sizeof(arr)/sizeof(int);
+	binarysearch_tree<int> btree;
+	int i = 0;
+	for (i = 0; i < size; i++)
+		btree.insert(arr[i]);
+	cout<<btree.findMin()<<endl;
+	cout<<btree.findMax()<<endl;
+	btree.printTree();
+	cout<<"\n***********************************************\n";
+
 	//³õÊ¼»¯
 	TreeNode<char> n_a = {'a', NULL, NULL};
 	TreeNode<char> n_b = {'b', NULL, NULL};
