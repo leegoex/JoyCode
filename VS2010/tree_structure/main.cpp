@@ -1,6 +1,7 @@
 #include <iostream>
 #include "expression_tree.h"
 #include "binarysearch_tree.h"
+#include "trace.h"
 using namespace std;
 
 template <typename T>
@@ -44,12 +45,14 @@ int main(int argc, char *argv[])
 {
 	int arr[] = {5, 12, 7, 4, 16, 9};
 	int size = sizeof(arr)/sizeof(int);
+	//srand((unsigned int)time(NULL));
 	binarysearch_tree<int> btree;
 	int i = 0;
-	for (i = 0; i < size; i++)
-		btree.insert(arr[i]);
-	cout<<btree.findMin()<<endl;
-	cout<<btree.findMax()<<endl;
+	for (i = 0; i < size/*100000*/; i++)
+		btree.insert(arr[i]/*rand()*/);
+	for (i = 0; i < size/*100000*/; i++)
+		btree.remove(arr[i]/*rand()*/);
+	cout<<btree.isEmpty()<<endl;
 	btree.printTree();
 	cout<<"\n***********************************************\n";
 

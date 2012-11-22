@@ -1,6 +1,8 @@
 #ifndef _BINARY_SEARCH_TREE_H_
 #define _BINARY_SEARCH_TREE_H_
 
+#include "trace.h"
+
 template<class T>
 class binarysearch_tree {
 public:
@@ -35,6 +37,16 @@ private:
 	void freeNode(binarysearch_node*& node);
 	void insertNode(binarysearch_node*& node, const T& value);
 	void removeNode(binarysearch_node*& node, const T& value);
+	void removeMin(binarysearch_node*& node, T& value) {
+		if (node->lchild) {
+			return removeMin(node->lchild, value);
+		} else {
+			value = node->value;
+			binarysearch_node *tmp = node;
+			node = (node->rchild != NULL)?node->rchild:NULL;
+			delete tmp;
+		}
+	}
 	binarysearch_node* cloneNode(const binarysearch_node *node) {
 		if (node==NULL)
 			return NULL;
@@ -115,6 +127,7 @@ void binarysearch_tree<T>::printNode(const binarysearch_node *node) const
 template<class T>
 void binarysearch_tree<T>::printTree() const
 {
+	Timepiece tp;
 	printNode(m_root);
 }
 
@@ -163,12 +176,12 @@ void binarysearch_tree<T>::removeNode(binarysearch_node*& node, const T& value)
 	if(node == NULL)
 		return;
 	if (value < node->value) {
-		removeNode(value, node->lchild);
+		removeNode(node->lchild, value);
 	} else if(value >  node->value) {
-		removeNode(value, node->rchild);
+		removeNode(node->rchild, value);
 	} else if(node->lchild!=NULL && node->rchild!=NULL) {
-		//找到右子树中的最小值，替换该节点
-		//遍历删除该最小节点
+		removeMin(node->rchild, node->value);
+		int i = 0;
 	} else {
 		binarysearch_node *old_value = node;
 		node = (node->lchild != NULL)?node->lchild:node->rchild;
