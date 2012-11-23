@@ -1,6 +1,7 @@
 #include <iostream>
 #include "expression_tree.h"
-#include "binarysearch_tree.h"
+#include "bst_tree.h"
+#include "avl_tree.h"
 #include "trace.h"
 using namespace std;
 
@@ -41,15 +42,23 @@ void printTreePostorder(TreeNode<T> *t)
 	cout<<t->c<<' ';
 }
 
+
 int main(int argc, char *argv[])
 {
 	int arr[] = {5, 12, 7, 4, 16, 9};
 	int size = sizeof(arr)/sizeof(int);
 	//srand((unsigned int)time(NULL));
-	binarysearch_tree<int> btree;
+	bst_tree<int, bst_node<int>> btree;
+	//avl_tree<int, avl_node<int>> btree;
 	int i = 0;
 	for (i = 0; i < size/*100000*/; i++)
 		btree.insert(arr[i]/*rand()*/);
+	cout<<btree.findMin()<<endl;
+	cout<<btree.findMax()<<endl;
+	cout<<btree.isEmpty()<<endl;
+	cout<<btree.contains(19)<<endl;
+	cout<<btree.contains(12)<<endl;
+	btree.printTree();
 	for (i = 0; i < size/*100000*/; i++)
 		btree.remove(arr[i]/*rand()*/);
 	cout<<btree.isEmpty()<<endl;

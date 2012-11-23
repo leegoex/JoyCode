@@ -21,9 +21,6 @@
     <ClCompile Include="expression_tree.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="binarysearch_tree.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="trace.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -32,10 +29,16 @@
     <ClInclude Include="expression_tree.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="binarysearch_tree.h">
+    <ClInclude Include="trace.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="trace.h">
+    <ClInclude Include="avl_tree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="bst_base.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="bst_tree.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
