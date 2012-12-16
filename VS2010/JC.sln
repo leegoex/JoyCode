@@ -5,6 +5,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sorting_algorithm", "sortin
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tree_structure", "tree_structure\tree_structure.vcxproj", "{580D94A6-9F49-493C-B8CF-096FCB9A8491}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "operator_plusplus", "operator_plusplus\operator_plusplus.vcxproj", "{08244870-C806-425C-BC82-CD6FAF62D173}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -19,6 +21,10 @@ Global
 		{580D94A6-9F49-493C-B8CF-096FCB9A8491}.Debug|Win32.Build.0 = Debug|Win32
 		{580D94A6-9F49-493C-B8CF-096FCB9A8491}.Release|Win32.ActiveCfg = Release|Win32
 		{580D94A6-9F49-493C-B8CF-096FCB9A8491}.Release|Win32.Build.0 = Release|Win32
+		{08244870-C806-425C-BC82-CD6FAF62D173}.Debug|Win32.ActiveCfg = Debug|Win32
+		{08244870-C806-425C-BC82-CD6FAF62D173}.Debug|Win32.Build.0 = Debug|Win32
+		{08244870-C806-425C-BC82-CD6FAF62D173}.Release|Win32.ActiveCfg = Release|Win32
+		{08244870-C806-425C-BC82-CD6FAF62D173}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
