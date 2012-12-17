@@ -45,24 +45,32 @@ void printTreePostorder(TreeNode<T> *t)
 
 int main(int argc, char *argv[])
 {
+	srand(time(NULL));
 	int arr[] = {5, 12, 7, 4, 16, 9};
 	int size = sizeof(arr)/sizeof(int);
 	//srand((unsigned int)time(NULL));
-	bst_tree<int, bst_node<int>> btree;
-	//avl_tree<int, avl_node<int>> btree;
+	//bst_tree<int, bst_node<int>> btree;
+	avl_tree<int, avl_node<int>> btree;
 	int i = 0;
-	for (i = 0; i < size/*100000*/; i++)
-		btree.insert(arr[i]/*rand()*/);
+	int temp[100];
+	for (i = 0; i < 100; i++) {
+		temp[i] = rand();
+		btree.insert(temp[i]);
+	}
 	cout<<btree.findMin()<<endl;
 	cout<<btree.findMax()<<endl;
-	cout<<btree.isEmpty()<<endl;
-	cout<<btree.contains(19)<<endl;
-	cout<<btree.contains(12)<<endl;
+// 	cout<<btree.isEmpty()<<endl;
+// 	cout<<btree.contains(19)<<endl;
+// 	cout<<btree.contains(12)<<endl;
 	btree.printTree();
-	for (i = 0; i < size/*100000*/; i++)
-		btree.remove(arr[i]/*rand()*/);
+	for (i = 0; i < 100; i++)
+	{
+		btree.remove(temp[i]);
+		btree.printTree();
+		cout<<endl;
+	}
 	cout<<btree.isEmpty()<<endl;
-	btree.printTree();
+	
 	cout<<"\n***********************************************\n";
 
 	//³õÊ¼»¯

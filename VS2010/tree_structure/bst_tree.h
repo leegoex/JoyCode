@@ -39,7 +39,6 @@ private:
 			removeNode(node->rchild, value);
 		} else if(node->lchild!=NULL && node->rchild!=NULL) {
 			removeMin(node->rchild, node->value);
-			int i = 0;
 		} else {
 			Node *old_value = node;
 			node = (node->lchild != NULL)?node->lchild:node->rchild;
@@ -48,7 +47,7 @@ private:
 	}
 	virtual void removeMin(Node*& node, T& value) {
 		if (node->lchild) {
-			return removeMin(node->lchild, value);
+			removeMin(node->lchild, value);
 		} else {
 			value = node->value;
 			Node *tmp = node;
