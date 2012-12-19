@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>随想</title>
+		<meta name="author" content="huligao" />
+		<!-- Date: 2012-12-13 -->
+	</head>
+	<body>
+		<div>
+			<h1>ImageMagick学习笔记</h1>
+			<p>使用ImageMagick主要是为了用来在Linux进行图片的处理。我需要对图片进行以下处理：<ol><li>截取图片上指定区域生成新的图片</li><li>缩放图片</li><li>在图片上叠加文字</li>
+				<li>合并多张图片</li>
+			</ol></p>
+			<p>一、截取图片生指定区域生成新的图片.使用Image类的crop可以截取图片指定区域的部分。该函数的原型为：<br />
+				<span style="margin-left: 30px;font: Verdana, Geneva, sans-serif;color: #0000FF;">void Magick::Image::crop(const Geometry&amp; geometry_)</span><br />
+				该函数接收一个类型为const Geometry&amp; 的变量作为参数，用来指定需要截取的宽、高和起始坐标。
+			</p>
+			<p>二、缩放图片。使用Image类的zoom可以对一个图片进行缩放。该函数的原型为：<br />
+				<span style="margin-left: 30px;font: Verdana, Geneva, sans-serif;color: #0000FF;">void Magick::Image::zoom(const Geometry&amp; geomerty_)</span><br />
+				该函数接收一个类型为const Germetry&amp; 的变量作为参数，用来指定缩放后图片的宽、高。
+			</p>
+			<p>三、在图片上叠加文字。使用Image类的draw可以在图片上绘制任何可以绘制的内容。该函数的原型为：<br />
+				<span style="margin-left: 30px;font: Verdana, Geneva, sans-serif;color: #0000FF;">void Magick::Image::draw(const std::list&lt;Magick::Drawable&gt;&amp; drawable_)</span><br />
+				drawable_是一个可绘制对象的链表。Magick++定义了许多可绘制的对象，例如DrawableColor、DrawableFont、DrawableText等。
+			</p>
+			<p>四、合并多张图片。使用模板函数appendImages可以将多个图片合并成一张图片。该函数的原型为：<br />
+				<span style="margin-left: 30px;font: Verdana, Geneva, sans-serif;color: #0000FF;">template&lt; class InputIterator &gt;</span><br />
+				<span style="margin-left: 30px;font: Verdana, Geneva, sans-serif;color: #0000FF;">void Magick::appendImages(Image* appendedImage_, InputIterator first_, InputIterator last_, bool stack_=false)</span><br />
+				appendedImage_返回合并后的图片<br />
+				first_、last_为要合并图片的迭代起始位置和结束位置。所以，首先要将要合并的图片放在一个可迭代的对象中，例如链表。<br />
+				stack_为合并方式，false表示水平合并，true表示垂直合并。默认为水平合并
+			</p>
+			<p>未完待续......</p>
+			<p>接下来需要学习多种图片格式和中文字体的显示。...........................</p>
+		</div>
+	</body>
+</html>
+
