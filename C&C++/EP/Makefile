@@ -14,3 +14,4 @@ ep_image.o:ep_image.hpp ep_image.cpp
 
 clean:
 	rm -f $(TARGET) $(OBJECTS)
+	rm -f demo.jpg

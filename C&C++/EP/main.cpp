@@ -1,38 +1,43 @@
 #include <iostream> 
 #include <string>
+#include <pthread.h>
+#include <unistd.h>
 #include "ep_image.hpp"
 using namespace std; 
+
+void* thread_start(void *arg)
+{
+	string sDir = (const char*)arg;
+	while(1)
+	{
+		ep_image epImg;
+		if(epImg.getImages(sDir) == true)
+		{
+			epImg.setImages();
+			epImg.setZoomArea(1370,700,1000,1408);
+			epImg.appendImage("demo.jpg");
+			epImg.moveImages();
+		}
+		usleep(1000*1000);
+	}
+	return (void*)0;
+}
+
 int main(int argc,char **argv) 
 { 
   InitializeMagick(*argv);
 
-  ep_image epImg;
-  vector<string> images;
-  images.push_back("192.168.0.10_1108071759143412C000_110807175914_110807175915_110807175913.jpg");
-  images.push_back("192.168.0.10_1108071759143412A000_110807175914_110807175915_110807175913.jpg");
-  images.push_back("192.168.0.10_1108071759143412B000_110807175914_110807175915_110807175913.jpg");
-  if(epImg.setImages(images)==true) 
+  string sDir = "/home/imagemagicdemo";
+  pthread_t th;
+  int result = pthread_create(&th, NULL, thread_start, (void*)sDir.c_str());
+  if(result != 0)
   {
-	  if(epImg.setZoomArea(1370, 700, 1000, 1408)==true)
-	  {
-	  	epImg.setAppend(ep_image::HORITOP);
-		if(epImg.appendImage("demo.jpg")==true)
-		{
-			cout<<"Demo succeed\n";
-		}
-		else
-		{
-			cout<<"Append Image failed\n";
-		}
-	  }
-	  else
-	  {
-		  cout<<"Set Image Zoom Area failed\n";
-	  }
-  }
-  else
-  {
-	  cout<<"Set Images failed\n";
+	  cout<<"create thread failed\n";
+	  return -1;
+  }else {
+
+	  int i = 0;
+	  cin>>i;
   }
 
   return 0; 

@@ -13,18 +13,18 @@ public:
 	ep_image();
 	~ep_image();
 
-	enum AppendStyle { HORITOP=0, HORIBOTTOM=1, VERTLEFT=2, VERTRIGHT=3 };
+	bool getImages(const string& imgDir);
+	void moveImages();
 
-	bool setImages(const vector<string>& images);
+	bool setImages();
 	bool setZoomArea(int x, int y, int width, int height);
-	void setAppend(AppendStyle style);
 	bool appendImage(const string& filename);
 
 private:
 	bool annotateImage(Image& img, const string& text);
-	vector<Image> m_images;
-	Image m_zoomImage;
-	AppendStyle m_style;
+	vector<string> m_imgFiles;
+	vector<Image> m_imgTop;
+	vector<Image> m_imgBottom;
 };
 
 #endif
